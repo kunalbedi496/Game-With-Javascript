@@ -3,9 +3,7 @@ var ctx = cvs.getContext("2d");
 var snakeW = 15;
 var SnakeH = 15;
 var dir = "right";
-var count = 0;
-constCANVAS_BORDER_COLOUR = "white";
-var score = document.getElementById("score");
+var countScore = 0;
 
 //create snake
 function drawSnake(x, y) {
@@ -56,6 +54,13 @@ function draw() {
         drawSnake(X, Y);
     }
     drawFood(food.x, food.y);
+
+    //scoreboard
+    ctx.fillStyle = "#1d2d50";
+    ctx.font = "20px Roboto";
+    ctx.fillText("SCORE:", 45, 40);
+    ctx.font = "25px Roboto";
+    ctx.fillText(countScore, 65, 65);
 
     // snake head
     var snakeX = snake[0].x;
@@ -110,9 +115,8 @@ function draw() {
 
 //Update Score Function
 function updateScore() {
-    count += 10;
-    // score.textContent = count;
-    document.getElementById("score").innerHTML = count;
+    countScore += 10;
+    // document.getElementById("score").innerHTML = countScore;
 }
 function endGame() {
     alert("GAME OVER");
