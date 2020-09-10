@@ -58,9 +58,9 @@ function draw() {
     //scoreboard
     ctx.fillStyle = "#82E3E1";
     ctx.font = "20px Roboto";
-    ctx.fillText("SCORE:", 45, 40);
-    ctx.font = "25px Roboto";
-    ctx.fillText(countScore, 65, 65);
+    ctx.fillText("SCORE:", 630, 40);
+    ctx.font = "22px Roboto";
+    ctx.fillText(countScore, 702, 40);
 
     // snake head
     var snakeX = snake[0].x;
