@@ -39,7 +39,7 @@ var food = {
 };
 
 function drawFood(x, y) {
-    ctx.fillStyle = "#28df99";
+    ctx.fillStyle = "#2980B9";
     ctx.fillRect(x * snakeW, y * SnakeH, snakeW, SnakeH);
     ctx.fillStyle = "black";
     ctx.strokeRect(x * snakeW, y * SnakeH, snakeW, SnakeH);
@@ -56,7 +56,7 @@ function draw() {
     drawFood(food.x, food.y);
 
     //scoreboard
-    ctx.fillStyle = "#1d2d50";
+    ctx.fillStyle = "#82E3E1";
     ctx.font = "20px Roboto";
     ctx.fillText("SCORE:", 45, 40);
     ctx.font = "25px Roboto";
@@ -65,13 +65,6 @@ function draw() {
     // snake head
     var snakeX = snake[0].x;
     var snakeY = snake[0].y;
-
-    //snake touches its own body
-    function didCollide() {
-        for (let i = 0; i < snake.length; i++) {
-            if (snake[0].x == snake[i].x || snake[0].y == snake[i].y) endGame();
-        }
-    }
 
     //snake touches the boundary
     if (
@@ -82,6 +75,8 @@ function draw() {
     ) {
         endGame();
     }
+    didCollide();
+    //snake crosses the boundary
 
     if (dir == "right") snakeX++;
     else if (dir == "left") snakeX--;
@@ -110,8 +105,20 @@ function draw() {
             y: snakeY
         };
     }
+
     snake.unshift(newHead);
 } //end draw function
+
+function didCollide() {
+    for (let i = 1; i < snake.length; i++) {
+        if (
+            snake.length > 4 &&
+            snake[0].x == snake[i].x &&
+            snake[0].y == snake[i].y
+        )
+            endGame();
+    }
+}
 
 //Update Score Function
 function updateScore() {
@@ -119,7 +126,8 @@ function updateScore() {
     // document.getElementById("score").innerHTML = countScore;
 }
 function endGame() {
-    alert("GAME OVER");
     clearInterval(timer);
+    alert("GAME OVER");
 }
+
 var timer = setInterval(draw, 100);
